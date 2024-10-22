@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        let humanScore = 0,
+        computerScore = 0;
+
+        function getRandomNum(min, max) {
+            return Math.floor(Math.random() * (max - min) + min);
+        }
+
+        function getComputerChoice() {
+            const choice = getRandomNum(0, 3)
+
+            switch (choice) {
+                case 0:
+                    return "Rock"
+                    break;
+                case 1:
+                    return "Paper"
+                    break;
+                case 2:
+                    return "Scissors"
+                    break
+            }
+        }
+
+        function getHumanChoice() {
+            const choice = prompt("Rock, Paper or Scissors?", "").toLowerCase()
+
+            if (choice == "rock" || choice == "paper" || choice == "scissors") {
+                return choice.charAt(0).toUpperCase() + choice.slice(1)
+            }  else {
+                return "ERROR"
+            }
+        }
+
+        function playRound(humanChoice, computerChoice) {
+           const playerWin = function() {
+            console.log("You win! " + humanChoice + " beats " + computerChoice + "!")
+        }
+           const computerWin = function() {
+            console.log("You lose! " + computerChoice + " beats " + humanChoice + "!")
+        }
+
+           if (humanChoice == computerChoice) {
+            console.log("Tie")
+           } else {
+            if (humanChoice == "Rock") {
+                if (computerChoice == "Scissors") {
+                    playerWin()
+                    humanScore++
+                } else {
+                    computerWin()
+                    computerScore++
+                }
+            } else if (humanChoice == "Paper") {
+                if (computerChoice == "Rock") {
+                    playerWin()
+                    humanScore++
+                } else {
+                    computerWin()
+                    computerScore++
+                }
+            } else if (humanChoice == "Scissors") {
+                if (computerChoice == "Rock") {
+                    computerWin()
+                    computerScore++
+                } else {
+                    playerWin()
+                    humanScore++
+                }
+            }
+           }
+
+        }
+        
+        function playGame() {
+         playRound(getHumanChoice(), getComputerChoice())
+         if (humanScore == 5) {
+             console.log(humanScore + "/" + computerScore + `!
+             You win!`)
+             humanScore = 0
+             computerScore = 0
+         } else if (computerScore == 5) {
+             console.log(humanScore + "/" + computerScore + `!
+             You lose!`)
+             humanScore = 0
+             computerScore = 0
+         } else {
+             console.log(humanScore + "/" + computerScore)
+         }
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
